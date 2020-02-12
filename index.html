@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme-Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="init()">
+    <div class = "images-wrapper">
+        <section class = "images-container" >
+            <!-- <img onClick = "onImageSelected(this)" src= "img/1.jpg">
+            <img onClick = "onImageSelected(this)" src= "img/2.jpg">
+            <img onClick = "onImageSelected(this)" src= "img/3.jpg">
+            <img onClick = "onImageSelected(this)" src= "img/4.jpg">
+            <img onClick = "onImageSelected(this)" src= "img/5.jpg">
+            <img onClick = "onImageSelected(this)" src= "img/6.jpg"> -->
+        </section>
+
+    </div>
+    
+
+    <section class="editor" hidden>
+        <div class="canvas-container">
+            <canvas id="my-canvas" height="450" width="450" onclick="draw(event)" style="border: 1px solid black;"></canvas>
+        </div>
+        <section class = "controls">
+            <input class = "meme-txt" type="text" placeholder="Enter Your text" >
+            <button class = "add-text" onclick="onAddText()">Add Text</button>
+            <button class = "selectLine" onClick = "onSelectLine()">=></button>
+
+        </section>
+    </section>
+
+    <script src ="js/meme-gen-service.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
