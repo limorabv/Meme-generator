@@ -14,6 +14,11 @@ var gMeme = {
 
 
 
+
+function getMeme(){
+    return gMeme;
+}    
+
 function getImageById(id){
     return gImgs.find (img => img.id === id);
 }
@@ -23,10 +28,27 @@ function getLines(){
     return gMeme.lines;
 }
 
-function updateMemeImg(id){
+
+
+function updateImg(id){
     gMeme.selectedImgId = id;
+    gImgId = id;
 }
 
+
+
+function getCurrImg(){
+    return getImageById(gImgId);
+}
+
+
+function setSelectedLine(LineIdx){
+    gMeme.selectedLineIdx = LineIdx;
+}
+
+function getSelectedLine() {
+    return gMeme.selectedLineIdx;
+}
 
 function addMemeLine(text, x, y){
     var newLine = createLine(text,x,y);
@@ -34,9 +56,11 @@ function addMemeLine(text, x, y){
     return newLine;
 }
 
-function createLine(text, x, y){
+
+
+function createLine(text, coord){
     return {
-        coord: {x:x, y:y},
+        coord: coord,
         txt: text,
         size: 30,
         align:'left',

@@ -26,8 +26,8 @@
             <canvas id="my-canvas" height="450" width="450" onclick="draw(event)" style="border: 1px solid black;"></canvas>
         </div>
         <section class = "controls">
-            <input class = "meme-txt" type="text" placeholder="Enter Your text" >
-            <button class = "add-text" onclick="onAddText()">Add Text</button>
+            <input class = "meme-txt" type="text" placeholder="Enter Your text" oninput="onAddText(event)" onkeydown ="onKeyDown(event)">
+            <!-- <button class = "add-text" onclick="onFinishedTyping()">Add Text</button> -->
             <button class = "selectLine" onClick = "onSelectLine()">=></button>
 
         </section>
