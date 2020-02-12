@@ -10,6 +10,7 @@ function init() {
 
 
 function renderMeme(){
+    clearCanvas()
     var meme = getMeme();
     var memeImg = getImageById(meme.selectedImgId);
     var img = new Image()
@@ -61,6 +62,8 @@ function onAddText(e){
 
     //if the user started writing new Line
     if(txt.length === 1 && e.inputType !== "deleteContentBackward"){
+        console.log("inside new line");
+        console.log(gMeme);
         setSelectedLine(lines.length);
         var coord;
         if (lines.length === 0) coord = {x: 50, y: 50}
@@ -71,7 +74,7 @@ function onAddText(e){
 
     //user is editing an existing line    
     } else {
-        console.log("selected line", getSelectedLine());
+        console.log("keep writing", gMeme);
         lines[getSelectedLine()].txt = txt;
         renderMeme();
     }
@@ -125,7 +128,7 @@ function drawText(line) {
     // gCtx.font = '40px Impact'
     gCtx.textAlign = 'left';
     gCtx.fillText(line.txt, line.coord.x, line.coord.y);
-    gCtx.strokeText(line.txt, 50, 50);
+    gCtx.strokeText(line.txt, line.coord.x, line.coord.y);
 }
 
 function getYCoordsForLine(){
