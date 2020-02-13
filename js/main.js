@@ -1,8 +1,7 @@
 'use strict'
-
+var isTypingLine = false;
 var gCanvas;
 var gCtx;
-
 function init() {
     rendrImages()
 }
@@ -10,13 +9,14 @@ function init() {
 
 
 function renderMeme(){
-    clearCanvas()
     var meme = getMeme();
     var memeImg = getImageById(meme.selectedImgId);
+    var selectedLineIdx = meme.selectedLineIdx;
     var img = new Image()
     img.src = memeImg.url;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+        if (selectedLineIdx > -1) editSelection(meme.lines[selectedLineIdx]);
         drawLines()
     }
     function drawLines(){
@@ -26,6 +26,17 @@ function renderMeme(){
             })
         }
     }
+}
+
+
+function editSelection(selectedLine){
+    var length = (selectedLine.txt.length === 1) ? 2 : selectedLine.txt.length;
+    var width = (length +2) *selectedLine.size/2.5 +5;
+    drawRect (selectedLine.coord.x -10, selectedLine.coord.y - selectedLine.size, width, selectedLine.size +10);
+    var elInput = document.querySelector('.meme-txt');
+    elInput.value = selectedLine.txt;
+    isTypingLine = true;
+
 }
 
 
@@ -53,28 +64,70 @@ function onImageSelected(imgId){
 }
 
 
+function onColorChange(){
+    var color = document.querySelector('.color-picker').value;
+    var lines = getLines();
+    if (getSelectedLine() === -1) return;
+    lines[getSelectedLine()].color = color;
+    renderMeme();
+}
+
+function onFontsChange(){
+    var font = document.querySelector('.fonts').value;
+    console.log(font);
+    var lines = getLines();
+    if (getSelectedLine() === -1) return;
+    lines[getSelectedLine()].font = font;
+    renderMeme();
+}
+
+
+function onFontSizeChange(sign){
+    var lines = getLines();
+    if (getSelectedLine() === -1) return;
+    lines[getSelectedLine()].size += (+sign) * 3;
+    renderMeme();
+
+}
+
+function onLineMove(sign){
+    var lines = getLines();
+    if (getSelectedLine() === -1) return;
+    lines[getSelectedLine()].coord.y += (+sign) * 3;
+    renderMeme();
+}
+
+
+function onDeleteLine (){
+    deleteSelected();
+    setSelectedLine(-1);
+    renderMeme();
+    isTypingLine = false;
+}
+
+
+
 function onAddText(e){
-    console.log(e);
     var elInput = document.querySelector('.meme-txt');
     var txt = elInput.value;
     var lines = getLines();
-    console.log("txt", txt);
+    console.log(txt);
 
+   
     //if the user started writing new Line
-    if(txt.length === 1 && e.inputType !== "deleteContentBackward"){
-        console.log("inside new line");
-        console.log(gMeme);
-        setSelectedLine(lines.length);
+    if(!isTypingLine && getSelectedLine() === -1){
+        setSelectedLine(lines.length)
         var coord;
         if (lines.length === 0) coord = {x: 50, y: 50}
         if (lines.length === 1) coord = {x: 50, y: gCanvas.height -50}
+        if (lines.length > 1) coord = {x: 50, y: gCanvas.height / 2}
         var newLine = createLine(txt, coord);
         lines.push(newLine);
         renderMeme();
+        isTypingLine = true;
 
     //user is editing an existing line    
     } else {
-        console.log("keep writing", gMeme);
         lines[getSelectedLine()].txt = txt;
         renderMeme();
     }
@@ -86,36 +139,13 @@ function onKeyDown(e){
     if (e.key === "Enter"){
         var elInput = document.querySelector('.meme-txt');
         elInput.value = '';
+        isTypingLine = false;
+        setSelectedLine(-1);
+        renderMeme();
+
     }
 }
 
-
-
-
-function removeTxtFromLine(){
-    // clearCanvas();
-    // var img = getCurrImg();
-    // drawImg(img.url);
-    // var elInput = document.querySelector('.meme-txt')
-    // var txt = elInput.value;
-    // var line = addMemeLine(txt, 50, 50);
-    // drawText(txt);
-    // renderTxt();
-    // drawImg(getImageById(gImgId.url));
-
-}
-
-function renderInput(){
-    var elInput = document.querySelector('.meme-txt')
-    var txt = elInput.value;
-}
-
-
-function clearCanvas() {
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-    // You may clear part of the canvas
-    // gCtx.clearRect(50, 50, 200, 200)
-}
 
 
 
@@ -124,8 +154,7 @@ function drawText(line) {
     gCtx.lineWidth = '2'
     gCtx.strokeStyle = `${line.stroke}`;
     gCtx.fillStyle = `${line.color}`;
-    gCtx.font = `${line.size}px Impact`;
-    // gCtx.font = '40px Impact'
+    gCtx.font = `${line.size}px ${line.font}`;
     gCtx.textAlign = 'left';
     gCtx.fillText(line.txt, line.coord.x, line.coord.y);
     gCtx.strokeText(line.txt, line.coord.x, line.coord.y);
@@ -139,27 +168,24 @@ function getYCoordsForLine(){
 
 
 function onSelectLine(){
+    var selectedLine = getSelectedLine();
+    selectedLine = setSelectedLine(selectedLine + 1);
+    var lines = getLines();
+    var line = lines[selectedLine];
+    console.log("lines" ,lines, "selectedLine", selectedLine);
+    renderMeme();
 
 }
 
 
 
-function drawRect(x, y) {
+function drawRect(x ,y, height, width) {
     gCtx.beginPath()
-    gCtx.rect(x, y, 150, 150)
+    gCtx.rect(x, y, height,  width)
     gCtx.strokeStyle = 'black'
     gCtx.stroke()
-    gCtx.fillStyle = 'orange'
-    gCtx.fillRect(x, y, 150, 150)
+    // gCtx.fillStyle = 'orange'
+    // gCtx.fillRect(50, 50, gCanvas.width, 50)
 }
 
 
-
-// function drawImg(path) {
-//     var img = new Image()
-//     img.src = path;
-//     img.onload = () => {
-//         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-//         drewLines()
-//     }
-// }
