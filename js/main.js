@@ -30,9 +30,13 @@ function renderMeme(){
 
 
 function editSelection(selectedLine){
+    console.log(gCtx.measureText(selectedLine.txt))
+    var x;
+    if (selectedLine.align === 'right') x = selectedLine.coord.x - (gCtx.measureText(selectedLine.txt).width  +10);
+    if (selectedLine.align === 'left') x =  selectedLine.coord.x -10;
     var length = (selectedLine.txt.length === 1) ? 2 : selectedLine.txt.length;
-    var width = (length +2) *selectedLine.size/2.5 +5;
-    drawRect (selectedLine.coord.x -10, selectedLine.coord.y - selectedLine.size, width, selectedLine.size +10);
+    // var width = (length +2) *selectedLine.size/2.5 +5;
+    drawRect (x, selectedLine.coord.y - selectedLine.size, gCtx.measureText(selectedLine.txt).width +30, selectedLine.size +10);
     var elInput = document.querySelector('.meme-txt');
     elInput.value = selectedLine.txt;
     isTypingLine = true;
@@ -51,13 +55,16 @@ function rendrImages(){
 
 function initCanvas(){
     gCanvas = document.getElementById('my-canvas')
+    // var canvas = document.getElementById('responsive-canvas');
+    var heightRatio = 1;
+    gCanvas.height = gCanvas.width * heightRatio;
     gCtx = gCanvas.getContext('2d')
 }
 
 
 function onImageSelected(imgId){
     document.querySelector('.images-wrapper').hidden = true;
-    document.querySelector('.editor').hidden = false;
+    document.querySelector('.editor').style.display = 'flex';
     initCanvas();
     updateImg(imgId);
     renderMeme();
@@ -87,7 +94,18 @@ function onFontSizeChange(sign){
     if (getSelectedLine() === -1) return;
     lines[getSelectedLine()].size += (+sign) * 3;
     renderMeme();
+}
 
+
+function onAlignChange(direction){
+    var lines = getLines();
+    if (getSelectedLine() === -1) return;
+    lines[getSelectedLine()].align = direction;
+    if (direction === 'right') lines[getSelectedLine()].coord.x = gCanvas.width - 50;
+    if (direction === 'left') lines[getSelectedLine()].coord.x = 50;
+
+    
+    renderMeme();
 }
 
 function onLineMove(sign){
@@ -151,11 +169,12 @@ function onKeyDown(e){
 
 
 function drawText(line) {
+    
     gCtx.lineWidth = '2'
     gCtx.strokeStyle = `${line.stroke}`;
     gCtx.fillStyle = `${line.color}`;
     gCtx.font = `${line.size}px ${line.font}`;
-    gCtx.textAlign = 'left';
+    gCtx.textAlign = `${line.align}`;
     gCtx.fillText(line.txt, line.coord.x, line.coord.y);
     gCtx.strokeText(line.txt, line.coord.x, line.coord.y);
 }
@@ -168,8 +187,10 @@ function getYCoordsForLine(){
 
 
 function onSelectLine(){
+    var lines = getLines();
     var selectedLine = getSelectedLine();
-    selectedLine = setSelectedLine(selectedLine + 1);
+    if (selectedLine +1 >= lines.length) setSelectedLine(0);
+    else selectedLine = setSelectedLine(selectedLine + 1);
     var lines = getLines();
     var line = lines[selectedLine];
     console.log("lines" ,lines, "selectedLine", selectedLine);

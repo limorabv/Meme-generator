@@ -82,7 +82,7 @@ function addMemeLine(text, x, y){
 
 
 
-function createLine(text, coord, font = 'Impact'){
+function createLine(text, coord, font = 'Impact', align = 'left'){
     return {
         coord: coord,
         txt: text,
@@ -90,7 +90,8 @@ function createLine(text, coord, font = 'Impact'){
         align:'left',
         color: 'white',
         stroke: 'black',
-        font: font
+        font: font,
+        align: align
     }
 }
 

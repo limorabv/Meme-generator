@@ -8,6 +8,7 @@
     <title>Meme-Generator</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/f66e7b03f4.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
 </head>
 
@@ -31,12 +32,17 @@
 
             <section class="editor" hidden>
                 <div class="canvas-container">
-                    <canvas id="my-canvas" height="551" width="541" onclick="draw(event)"
-                        style="border: 1px solid black;"></canvas>
+                    <canvas id="my-canvas"  onclick="draw(event)"></canvas>
                 </div>
                 <section class="controls">
                     <input class="meme-txt" type="text" placeholder="Enter Your text" oninput="onAddText(event)"
                         onkeydown="onKeyDown(event)">
+                    <button class="add-line round" onClick="onAddLine()"><img src = "ICONS/add.png"></button>
+                    <button class="selectLine round" onClick="onSelectLine()"><img src = "ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                    <button class="delete-line round" onClick="onDeleteLine()"><img src = "ICONS/trash.png"></button>
+
+
+    
                     <input class="color-picker" onchange="onColorChange()" type="color" name="color" />
                     <select class="fonts" onchange="onFontsChange()">
                         <option value="Ariel">Ariel</option>
@@ -45,13 +51,17 @@
                         <option value="Impact">Impact</option>
                     </select>
                     <button class="font-bigger round" onClick="onFontSizeChange(1)"><img src = "ICONS/increase font - icon.png"></button>
-                    <button class="font-bigger round" onClick="onFontSizeChange(-1)"><img src = "ICONS/decrease font - icon.png"></button>
-                    <button class="font-bigger round" onClick="onLineMove(-1)">up</button>
-                    <button class="font-bigger round" onClick="onLineMove(1)">down</button> 
-                    <button class="delete-line round" onClick="onDeleteLine()"><img src = "ICONS/trash.png"></button>
+                    <button class="font-smaller round" onClick="onFontSizeChange(-1)"><img src = "ICONS/decrease font - icon.png"></button>
 
-                    <button class="selectLine round" onClick="onSelectLine()"><img src = "ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
-                    up-and-down-opposite-double-arrows-side-by-side
+                    <button class=" align align-left round" onClick="onAlignChange('left')"><img src = "ICONS/align-to-left.png"></button>
+                    <button class=" align align-center round" onClick="onAlignChange('center')"><img src = "ICONS/center-text-alignment.png"></button>
+                    <button class=" align align-right round" onClick="onAlignChange('right')"><img src = "ICONS/align-to-right.png"></button>
+                    <button class="share round" onClick="onShare()">share</button>
+
+
+                    <!-- <button class="font-bigger round" onClick="onLineMove(-1)">up</button>
+                    <button class="font-bigger round" onClick="onLineMove(1)">down</button>  -->
+
                 </section>
             </section>
 
