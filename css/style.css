@@ -261,7 +261,7 @@ select {
     align-items: flex-start;
 }
 
-@media (max-width: 890px) {
+@media (max-width: 600px) {
     .images-container{
         margin-left: auto;
         margin-right: auto;
