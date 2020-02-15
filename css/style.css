@@ -290,7 +290,7 @@ select {
     }
 
     .canvas-container {
-        widows: 100%;
+        width: 76%;
     }
 
     canvas{
@@ -308,6 +308,7 @@ select {
     }
 
     .controls{
+        width: auto;
         gap: 7px;
         margin-right: 0;;
     }
