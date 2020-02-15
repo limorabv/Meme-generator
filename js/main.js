@@ -34,6 +34,8 @@ function editSelection(selectedLine){
     var x;
     if (selectedLine.align === 'right') x = selectedLine.coord.x - (gCtx.measureText(selectedLine.txt).width  +10);
     if (selectedLine.align === 'left') x =  selectedLine.coord.x -10;
+    if (selectedLine.align === 'center') x =  selectedLine.coord.x - (gCtx.measureText(selectedLine.txt));
+
     var length = (selectedLine.txt.length === 1) ? 2 : selectedLine.txt.length;
     // var width = (length +2) *selectedLine.size/2.5 +5;
     drawRect (x, selectedLine.coord.y - selectedLine.size, gCtx.measureText(selectedLine.txt).width +30, selectedLine.size +10);
@@ -103,6 +105,8 @@ function onAlignChange(direction){
     lines[getSelectedLine()].align = direction;
     if (direction === 'right') lines[getSelectedLine()].coord.x = gCanvas.width - 50;
     if (direction === 'left') lines[getSelectedLine()].coord.x = 50;
+    if (direction === 'center') lines[getSelectedLine()].coord.x = gCanvas.width - gCanvas.width/2;
+
 
     
     renderMeme();
@@ -162,6 +166,13 @@ function onKeyDown(e){
         renderMeme();
 
     }
+}
+
+
+function onShare(elLink) {
+    console.log("share");
+    var imgContent = gCanvas.toDataURL('image/jpeg');
+    elLink.href = imgContent
 }
 
 

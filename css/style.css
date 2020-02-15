@@ -88,6 +88,10 @@ footer {
 
 }
 
+.images-container img:hover {
+    cursor: pointer;
+}
+
 
 canvas {
     width: 170%;
@@ -113,45 +117,57 @@ canvas {
     border: none;
 }
 
+.lineUp {
+    grid-column: 1/2;
+    grid-row: 2/3;
+
+}
+
+.line-down{
+    grid-column: 2/3;
+    grid-row: 2/3;
+
+}
+
 .add-line{
     grid-column: 5/6;
-    grid-row: 1/2
+    grid-row: 1/2;
 }
 
 .selectLine {
-    grid-column: 2/2;
-    grid-row: 2/3
+    grid-column: 3/4;
+    grid-row: 2/3;
 }
 
 .delete-line {
     grid-column: 4/5;
-    grid-row: 2/3
+    grid-row: 2/3;
 }
 
 
 .font-bigger {
     grid-column: 1/2;
-    grid-row: 3/4
+    grid-row: 3/4;
 }
 
 .font-smaller {
     grid-column: 2/3;
-    grid-row: 3/4
+    grid-row: 3/4;
 }
 
 .align-left {
     grid-column: 3/4;
-    grid-row: 3/4
+    grid-row: 3/4;
 }
 
 .align-center {
     grid-column: 4/5;
-    grid-row: 3/4
+    grid-row: 3/4;
 }
 
 .align-right {
     grid-column: 5/6;
-    grid-row: 3/4
+    grid-row: 3/4;
 }
 
 .color-picker {
@@ -215,6 +231,10 @@ a {
     padding: 10px;
 
     background-color: white;
+}
+
+.round:hover {
+    cursor: pointer;
 }
 
 button.round img {
@@ -305,6 +325,10 @@ select {
 
     .button {
         height: fit-content;
+    }
+
+    .round {
+        padding: 0;
     }
 
     button.share {
