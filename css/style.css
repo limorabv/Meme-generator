@@ -278,4 +278,38 @@ select {
     
     } 
 
+    .editor {
+        display: none;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        /* align-items: center; */
+        /* padding: 10px; */
+        background-color: #e3e3e3;
+        /* background-color: lightblue; */
+        height: 81vh;
+    }
+
+    .canvas-container {
+        widows: 100%;
+    }
+
+    canvas{
+        width: 100%;
+    }
+
+    button.round img {
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    button.share {
+        margin-top: 4px;
+        height: 35px;
+    }
+
+    .controls{
+        gap: 7px;
+        margin-right: 0;;
+    }
+
 }
