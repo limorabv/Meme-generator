@@ -279,6 +279,7 @@ select {
     } 
 
     .editor {
+        justify-content: space-around;
         display: none;
         flex-direction: column;
         /* justify-content: space-between; */
@@ -302,12 +303,17 @@ select {
         height: 1.2em;
     }
 
+    .button {
+        height: fit-content;
+    }
+
     button.share {
         margin-top: 4px;
         height: 35px;
     }
 
     .controls{
+        height: 37%;
         width: auto;
         gap: 7px;
         margin-right: 0;;
