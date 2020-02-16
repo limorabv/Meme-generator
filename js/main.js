@@ -2,8 +2,15 @@
 var isTypingLine = false;
 var gCanvas;
 var gCtx;
+
+
+
+
+
 function init() {
     rendrImages()
+    initSaved();
+    initMeme();
 }
 
 
@@ -50,9 +57,12 @@ function editSelection(selectedLine){
 
 
 function rendrImages(){
+    document.querySelector('.images-wrapper').hidden = false;
+    document.querySelector('.editor').style.display = 'none';
     var images = getImagesForDispaly();
     var strImgHtmls = images.map ( img => `<img src = "${img.url}" onclick = "onImageSelected(${img.id})" >`)
     document.querySelector('.images-container').innerHTML = strImgHtmls.join(' ');
+    initMeme();
 }
 
 function initCanvas(){
@@ -65,6 +75,7 @@ function initCanvas(){
 
 
 function onImageSelected(imgId){
+    initMeme();
     document.querySelector('.images-wrapper').hidden = true;
     document.querySelector('.editor').style.display = 'flex';
     initCanvas();
@@ -106,9 +117,6 @@ function onAlignChange(direction){
     if (direction === 'right') lines[getSelectedLine()].coord.x = gCanvas.width - 50;
     if (direction === 'left') lines[getSelectedLine()].coord.x = 50;
     if (direction === 'center') lines[getSelectedLine()].coord.x = gCanvas.width - gCanvas.width/2;
-
-
-    
     renderMeme();
 }
 
@@ -169,10 +177,57 @@ function onKeyDown(e){
 }
 
 
+
+function onAddLine(){
+    var elInput = document.querySelector('.meme-txt');
+    elInput.value = '';
+    isTypingLine = false;
+    setSelectedLine(-1);
+    renderMeme();
+
+}
+
+
 function onShare(elLink) {
     console.log("share");
     var imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent
+}
+
+
+function onSave(){
+    console.log("save");
+    setSelectedLine(-1);
+    renderMeme();
+    save()
+}
+
+
+
+function onDownload(elLink){
+    let fakeLink = document.createElement('a')
+    console.log("download");
+    
+    var imgContent = gCanvas.toDataURL();
+    fakeLink.href = imgContent;
+    
+    fakeLink.download = 'myMeme.png';
+    console.log(elLink.href);
+    fakeLink.click();
+}
+
+
+function showSaved(){
+    document.querySelector('.images-wrapper').hidden = true;
+    document.querySelector('.editor').style.display = 'none';
+    document.querySelector('.saved-memes').style.display ='flex';
+    var savedMems = getSavedMems();
+    savedMems.map(meme => {
+        var imgContent = gCanvas.toDataURL('image/jpeg');
+        elLink.href = imgContent
+
+    })
+
 }
 
 

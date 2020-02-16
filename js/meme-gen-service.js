@@ -1,4 +1,6 @@
 gImgId = 4;
+var gID = 0;
+const KEY = 'mems'
 var gImgs = [
             {id: 1, url: 'img/1.jpg', keywords: ['happy']},
             {id: 2, url: 'img/2.jpg', keywords: ['happy']},
@@ -26,8 +28,29 @@ var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: -1,
     lines: []
-    }           
+    }   
+    
 
+  
+
+
+function initSaved(){
+    console.log("init saved");
+    saveToStorage(KEY, []);
+}
+
+
+function initMeme(){
+    gMeme.selectedLineIdx =  -1;
+    gMeme.lines = [];
+}
+
+
+function save(){
+    var savedMems  = loadFromStorage(KEY)
+    savedMems.push(gMeme)
+    saveToStorage(KEY, savedMems);
+}
 
 
 

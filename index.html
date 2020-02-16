@@ -13,20 +13,23 @@
 </head>
 
 <body onload="init()">
+    <div class="screen" onclick="toggleMenu()"></div>
     <div class="site-wrapper">
         <header class ="flex align-center space-between">
             <img class ="logo" src= "LOGO.png">
             <ul class = "main-nav clean-list flex space-between">
-                <li><a href = "#" class = "flex justify-center align-center active">Gallery</a></li>
+                <li><a href = "#" class = "flex justify-center align-center active" onclick = "rendrImages()">Gallery</a></li>
+                <li><a href = "#" class = "flex justify-center align-center" onclick="showSaved()">Saved</a></li>
                 <li><a href = "#" class = "flex justify-center align-center">About</a></li>
-           
-            </ul>
+           </ul>
+           <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
         </header>
         <div class="main">
+            <section class = "saved-memes" ></section>
+
             <div class="images-wrapper"> 
                 <section class="search"><h1>Search</h1></section>
-
-
                 <section class="images-container"></section>
             </div>
 
@@ -37,9 +40,9 @@
                 <section class="controls">
                     <input class="meme-txt" type="text" placeholder="Enter Your text" oninput="onAddText(event)"
                         onkeydown="onKeyDown(event)">
-                    <button class="add-line round" onClick="onAddLine()"><img src = "ICONS/add.png"></button>
-                    <button class="selectLine round" onClick="onSelectLine()"><img src = "ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
-                    <button class="delete-line round" onClick="onDeleteLine()"><img src = "ICONS/trash.png"></button>
+                    <button class="add-line round" onClick="onAddLine()"><img src = "icons2/add.png"></button>
+                    <button class="selectLine round" onClick="onSelectLine()"><img src = "icons2/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                    <button class="delete-line round" onClick="onDeleteLine()"><img src = "icons2/trash.png"></button>
 
 
     
@@ -50,13 +53,15 @@
                         <option value="fantasy">fantasy</option>
                         <option value="Impact">Impact</option>
                     </select>
-                    <button class="font-bigger round" onClick="onFontSizeChange(1)"><img src = "ICONS/increase font - icon.png"></button>
-                    <button class="font-smaller round" onClick="onFontSizeChange(-1)"><img src = "ICONS/decrease font - icon.png"></button>
+                    <button class="font-bigger round" onClick="onFontSizeChange(1)"><img src = "icons2/increase font - icon.png"></button>
+                    <button class="font-smaller round" onClick="onFontSizeChange(-1)"><img src = "icons2/decrease font - icon.png"></button>
 
-                    <button class=" align align-left round" onClick="onAlignChange('left')"><img src = "ICONS/align-to-left.png"></button>
-                    <button class=" align align-center round" onClick="onAlignChange('center')"><img src = "ICONS/center-text-alignment.png"></button>
-                    <button class=" align align-right round" onClick="onAlignChange('right')"><img src = "ICONS/align-to-right.png"></button>
-                    <button class="share round"><a href="#" onClick="onShare(this)">Share</a></button>
+                    <button class=" align align-left round" onClick="onAlignChange('left')"><img src = "icons2/align-to-left.png"></button>
+                    <button class=" align align-center round" onClick="onAlignChange('center')"><img src = "icons2/center-text-alignment.png"></button>
+                    <button class=" align align-right round" onClick="onAlignChange('right')"><img src = "icons2/align-to-right.png"></button>
+                <button class="share round" onclick="onDownload(this)" href ="#"><img src = "icons2/download.png"></button>
+                    <button class="save round" onclick="onSave()"><img src = "icons2/disc.png"></button>
+
 
 
                     <button class="lineUp round" onClick="onLineMove(-1)">up</button>
@@ -70,7 +75,12 @@
 
         <footer></footer>
     </div>
-
+    <script>
+        function toggleMenu() {
+                document.body.classList.toggle('menu-open');
+            }
+        </script>
+    <script src="js/storage-service.js"></script>
     <script src="js/meme-gen-service.js"></script>
     <script src="js/main.js"></script>
 </body>
