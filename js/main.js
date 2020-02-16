@@ -59,6 +59,9 @@ function editSelection(selectedLine){
 function rendrImages(){
     document.querySelector('.images-wrapper').hidden = false;
     document.querySelector('.editor').style.display = 'none';
+    document.querySelector('.saved-memes').style.display ='none';
+    document.querySelector ('.main-nav .saved').classList.remove('active');
+    document.querySelector ('.main-nav .gallery').classList.add('active');
     var images = getImagesForDispaly();
     var strImgHtmls = images.map ( img => `<img src = "${img.url}" onclick = "onImageSelected(${img.id})" >`)
     document.querySelector('.images-container').innerHTML = strImgHtmls.join(' ');
@@ -199,7 +202,8 @@ function onSave(){
     console.log("save");
     setSelectedLine(-1);
     renderMeme();
-    save()
+    var imgContent = gCanvas.toDataURL();
+    save(imgContent)
 }
 
 
@@ -218,15 +222,21 @@ function onDownload(elLink){
 
 
 function showSaved(){
+    console.log("show saved")
     document.querySelector('.images-wrapper').hidden = true;
     document.querySelector('.editor').style.display = 'none';
     document.querySelector('.saved-memes').style.display ='flex';
-    var savedMems = getSavedMems();
-    savedMems.map(meme => {
-        var imgContent = gCanvas.toDataURL('image/jpeg');
-        elLink.href = imgContent
+    document.querySelector ('.main-nav .saved').classList.add('active');
+    document.querySelector ('.main-nav .gallery').classList.remove('active');
 
-    })
+    var savedImgs = getSavedImgs();
+    console.log(savedImgs[0]);
+    var savedImgsStr = savedImgs.map(data => 
+        `<img src = "${data}" />`
+    )
+    savedImgsStr = savedImgsStr.join(' ')
+    console.log(savedImgsStr);
+    document.querySelector('.saved-memes').innerHTML = savedImgsStr;
 
 }
 

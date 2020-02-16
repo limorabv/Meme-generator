@@ -18,15 +18,16 @@
         <header class ="flex align-center space-between">
             <img class ="logo" src= "LOGO.png">
             <ul class = "main-nav clean-list flex space-between">
-                <li><a href = "#" class = "flex justify-center align-center active" onclick = "rendrImages()">Gallery</a></li>
-                <li><a href = "#" class = "flex justify-center align-center" onclick="showSaved()">Saved</a></li>
-                <li><a href = "#" class = "flex justify-center align-center">About</a></li>
+                <li><a href = "#" class = "gallery flex justify-center align-center active" onclick = "rendrImages()">Gallery</a></li>
+                <li><a href = "#" class = "saved flex justify-center align-center" onclick="showSaved()">Saved</a></li>
+                <li><a href = "#" class = "about flex justify-center align-center">About</a></li>
            </ul>
            <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
         </header>
         <div class="main">
-            <section class = "saved-memes" ></section>
+            <section class = "saved-memes flex space-evenly align-start wrap" >
+            </section>
 
             <div class="images-wrapper"> 
                 <section class="search"><h1>Search</h1></section>

@@ -126,6 +126,7 @@ canvas {
 
 
 .editor, .saved-memes {
+    height: max-content;
     display: none;
     justify-content: space-between;
     align-items: center;
@@ -321,6 +322,10 @@ select {
     align-items: flex-start;
 }
 
+.flex.wrap{
+    flex-wrap: wrap;
+}
+
 .screen {
     position: fixed;
     top: 0;
@@ -458,7 +463,20 @@ select {
     a.active {
         box-shadow: none;
     }
+
+    .saved-memes {
+    height: auto;
+    }
 }
+
+
+@media (max-width: 620px) {
+    .saved-memes {
+        height: auto;
+      
+    }}
+
+
 
 
 @media (max-width: 518px) {

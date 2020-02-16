@@ -1,6 +1,6 @@
 gImgId = 4;
 var gID = 0;
-const KEY = 'mems'
+const KEY = 'dataMems'
 var gImgs = [
             {id: 1, url: 'img/1.jpg', keywords: ['happy']},
             {id: 2, url: 'img/2.jpg', keywords: ['happy']},
@@ -36,7 +36,7 @@ var gMeme = {
 
 function initSaved(){
     console.log("init saved");
-    saveToStorage(KEY, []);
+    if (!loadFromStorage(KEY)) saveToStorage(KEY, []);
 }
 
 
@@ -46,10 +46,14 @@ function initMeme(){
 }
 
 
-function save(){
+function save(dataImg){
     var savedMems  = loadFromStorage(KEY)
-    savedMems.push(gMeme)
+    savedMems.push(dataImg)
     saveToStorage(KEY, savedMems);
+}
+
+function getSavedImgs(){
+    return loadFromStorage(KEY);
 }
 
 
