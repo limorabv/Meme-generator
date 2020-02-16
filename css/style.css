@@ -357,7 +357,7 @@ select {
 
 
 
-@media (max-width: 650px) {
+@media (max-width: 790px) {
 
     .menu-btn {
         display: inline-block;
@@ -468,8 +468,8 @@ select {
     }
 
     .controls{
-        height: 44%;
-        width: 61%;
+        height: 35%;
+        width: 51%;
     }
 
 }
