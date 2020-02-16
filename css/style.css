@@ -393,7 +393,7 @@ select {
     }
 
     .canvas-container {
-        width: 61%;
+        width: 45%;
     }
 
     canvas{
@@ -461,15 +461,15 @@ select {
 }
 
 
-@media (max-width: 520px) {
+@media (max-width: 518px) {
     .canvas-container{
-        width: 70%;
+        width: 63%;
 
     }
 
     .controls{
-        height: 35%;
-        width: 51%;
+        height: 43%;
+        width: 65%;
     }
 
 }
