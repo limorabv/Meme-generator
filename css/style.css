@@ -459,3 +459,17 @@ select {
         box-shadow: none;
     }
 }
+
+
+@media (max-width: 520px) {
+    .canvas-container{
+        width: 70%;
+
+    }
+
+    .controls{
+        height: 44%;
+        width: 61%;
+    }
+
+}
