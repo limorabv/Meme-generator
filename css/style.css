@@ -473,3 +473,17 @@ select {
     }
 
 }
+
+
+@media (max-width: 380px) {
+    .canvas-container{
+        width: 85%;
+
+    }
+
+    .controls{
+        height: 43%;
+        width: 80%;
+    }
+
+}
